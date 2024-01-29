@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     // UI object to display winning text.
     public GameObject winTextObject;
 
+    public GameObject youDiedObject;
+    // Coroutine reference to control the display duration of the "You Died" message.
+    public GameObject backgroundColor;
+    private Coroutine youDiedCoroutine;
+
     // Start is called before the first frame update.
     void Start()
     {
@@ -39,7 +44,9 @@ public class PlayerController : MonoBehaviour
         SetCountText();
 
         // Initially set the win text to be inactive.
+        backgroundColor.SetActive(false);
         winTextObject.SetActive(false);
+        youDiedObject.SetActive(false);
     }
 
     // This function is called when a move input is detected.
@@ -78,6 +85,39 @@ public class PlayerController : MonoBehaviour
             // Update the count display.
             SetCountText();
         }
+
+        
+        if (other.gameObject.CompareTag("Death"))
+        {
+            // Player dies
+            transform.position = new Vector3(0f, 0.5f, 0f);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            // Activate the "You Died" message.
+            youDiedObject.SetActive(true);
+
+            backgroundColor.SetActive(true);
+
+            // Start the coroutine to hide the "You Died" message after a duration.
+            if (youDiedCoroutine != null)
+            {
+                StopCoroutine(youDiedCoroutine);
+            }
+            youDiedCoroutine = StartCoroutine(HideYouDiedMessageAfterDuration(3f)); // Change 3f to the desired duration.
+        }
+    }
+
+    // Coroutine to hide the "You Died" message after a specified duration.
+    IEnumerator HideYouDiedMessageAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        // Deactivate the "You Died" message after the duration.
+        youDiedObject.SetActive(false);
+        backgroundColor.SetActive(false);
+        
     }
 
     // Function to update the displayed count of "PickUp" objects collected.
