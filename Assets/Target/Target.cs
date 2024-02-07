@@ -26,7 +26,7 @@ public class Target : MonoBehaviour
             rend.sharedMaterial = material[1];
 
             //set object to hit
-            hit = true;
+            //hit = true;
         }
     }
 }
