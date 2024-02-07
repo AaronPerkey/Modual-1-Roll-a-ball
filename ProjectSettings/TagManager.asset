@@ -6,15 +6,17 @@ TagManager:
   tags:
   - PickUp
   - Death
+  - Splat
+  - Table
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Snowball
   - Water
   - UI
-  - 
-  - 
+  - Table
+  - Controller
   - 
   - 
   - 
