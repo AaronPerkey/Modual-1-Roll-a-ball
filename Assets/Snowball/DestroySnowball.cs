@@ -8,9 +8,8 @@ public class DestorySnowball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null)
+        if (collision.gameObject.CompareTag("Splat")||collision.gameObject.CompareTag("Target"))
         {
-            
             Destroy(gameObject);
             gameObject.SetActive(false);
             Instantiate(splat, transform.position, transform.rotation);

@@ -8,6 +8,9 @@ TagManager:
   - Death
   - Splat
   - Table
+  - Target
+  - Splatproof
+  - Ball
   layers:
   - Default
   - TransparentFX
